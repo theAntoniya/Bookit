@@ -3,6 +3,7 @@ package com.bookit.pages;
 import com.bookit.utilities.BrowserUtils;
 import com.bookit.utilities.ConfigurationReader;
 import com.bookit.utilities.Driver;
+import com.bookit.utilities.Environment;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
@@ -10,17 +11,17 @@ import org.openqa.selenium.support.PageFactory;
 import java.lang.module.Configuration;
 
 public class SignInPage {
-	
+
 	public SignInPage() {
 		PageFactory.initElements(Driver.get(), this);
-	}	
-	
+	}
+
 	@FindBy(name="email")
 	public WebElement emailField;
 
 	@FindBy(name = "password")
 	public WebElement passwordField;
-	
+
 	@FindBy(xpath = "//button[.='sign in']")
 	public WebElement signInButton;
 
@@ -31,17 +32,17 @@ public class SignInPage {
 
 		switch (role) {
 			case "teacher":
-				email = ConfigurationReader.getProperty("teacher_email");
-				password = ConfigurationReader.getProperty("teacher_password");
+				email = Environment.TEACHER_EMAIL;
+				password = Environment.TEACHER_PASSWORD;
 				break;
 
 			case "team-member":
-				email = ConfigurationReader.getProperty("team_member_email");
-				password = ConfigurationReader.getProperty("team_member_password");
+				email = Environment.MEMBER_EMAIL;
+				password = Environment.MEMBER_PASSWORD;
 				break;
 			case "team-leader":
-				email = ConfigurationReader.getProperty("team_leader_email");
-				password = ConfigurationReader.getProperty("team_leader_password");
+				email = Environment.LEADER_EMAIL;
+				password = Environment.LEADER_PASSWORD;
 				break;
 			default:
 
@@ -53,5 +54,5 @@ public class SignInPage {
 		signInButton.click();
 
 	}
-	
+
 }
